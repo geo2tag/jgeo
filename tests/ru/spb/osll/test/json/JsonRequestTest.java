@@ -51,8 +51,10 @@ public class JsonRequestTest extends TestCase {
 
 	// GEO2TAG INSTANCE
 	public final String url = "http://tracks.osll.spb.ru:81/service";
+	public String m_token="NOT INITIALIZED";
 
-	public void testLogin() {
+	protected void setUp() throws Exception {
+
 		JSONObject JSONResponse = new JsonLoginRequest("Mark", "test", url)
 				.doRequest();
 		assertNotNull(JSONResponse);
@@ -60,11 +62,10 @@ public class JsonRequestTest extends TestCase {
 			Log.out.println(LOG, JSONResponse.toString());
 			JsonLoginResponse r = new JsonLoginResponse();
 			r.parseJson(JSONResponse);
-			assertEquals(r.getErrno(), 0);
-			assertEquals(r.getAuthString(), "MMMMMMMMMM");
+			m_token = r.getAuthString();
 		}
 	}
-	
+/*
     public void testVersion() {
         JSONObject JSONResponse = new JsonVersionRequest(url).doRequest();
         assertNotNull(JSONResponse);
@@ -77,7 +78,7 @@ public class JsonRequestTest extends TestCase {
         }
     }
 
-    public void testApplySubscribeUnsubscribe() {
+		public void testApplySubscribeUnsubscribe() {
         final JSONObject JSONResponse = new JsonApplyChannelRequest(
                 "MMMMMMMMMM", "Test channel2", "My test channel",
                 "http://osll.spb.ru", 3000, url).doRequest();
@@ -113,9 +114,10 @@ public class JsonRequestTest extends TestCase {
             assertEquals(r2.getErrno(), Errno.SUCCESS);
         }
     }
+*/
 
 	public void testAvailableChannels() {
-		JSONObject JSONResponse = new JsonAvailableChannelRequest("KKKKKKKKKK",
+		JSONObject JSONResponse = new JsonAvailableChannelRequest(m_token,
 				url).doRequest();
 		assertNotNull(JSONResponse);
 		if (JSONResponse != null) {
@@ -148,7 +150,7 @@ public class JsonRequestTest extends TestCase {
 
 	public void testApplyChannel() {
 		final JSONObject JSONResponse = new JsonApplyChannelRequest(
-				"MMMMMMMMMM", "Test channel", "My test channel",
+				m_token, "Test channel", "My test channel",
 				"http://osll.spb.ru", 3000, url).doRequest();
 		assertNotNull(JSONResponse);
 		if (JSONResponse != null) {
@@ -163,7 +165,7 @@ public class JsonRequestTest extends TestCase {
 
 	public void testCircleFilter() {
 		final JSONObject JSONResponse = new JsonFilterCircleRequest(
-				"MMMMMMMMMM", 60.1632, 24.8593, 30.0,
+				m_token, 60.1632, 24.8593, 30.0,
 				"04 03 2011 15:33:47.630", "31 12 2011 15:33:47.630", url)
 				.doRequest();
 		assertNotNull(JSONResponse);
@@ -185,7 +187,7 @@ public class JsonRequestTest extends TestCase {
 
 	public void testCylinderFilter() {
 		final JSONObject JSONResponse = new JsonFilterCylinderRequest(
-				"MMMMMMMMMM", 60.1632, 24.8593, 30.0, 1.0, -1.0,
+				m_token, 60.1632, 24.8593, 30.0, 1.0, -1.0,
 				"04 03 2011 15:33:47.630", "31 12 2011 15:33:47.630", url)
 				.doRequest();
 		assertNotNull(JSONResponse);
@@ -207,7 +209,7 @@ public class JsonRequestTest extends TestCase {
 
 	public void testRectangleFilter() {
 		final JSONObject JSONResponse = new JsonFilterRectangleRequest(
-				"MMMMMMMMMM", 0.0, 100.0, 0.0, 100.0,
+				m_token, 0.0, 100.0, 0.0, 100.0,
 				"04 03 2011 15:33:47.630", "31 12 2011 15:33:47.630", url)
 				.doRequest();
 		assertNotNull(JSONResponse);
@@ -228,7 +230,7 @@ public class JsonRequestTest extends TestCase {
 	}
 
 	public void testBoxFilter() {
-		final JSONObject JSONResponse = new JsonFilterBoxRequest("MMMMMMMMMM",
+		final JSONObject JSONResponse = new JsonFilterBoxRequest(m_token,
 				0.0, 100.0, 0.0, 100.0, -0.1, 0.1, "04 03 2011 15:33:47.630",
 				"31 12 2011 15:33:47.630", url).doRequest();
 		assertNotNull(JSONResponse);
@@ -250,7 +252,7 @@ public class JsonRequestTest extends TestCase {
 
 	public void testPolygonFilter() {
 		JsonFilterPolygonRequest filter = new JsonFilterPolygonRequest(
-				"MMMMMMMMMM", "04 03 2011 15:33:47.630",
+				m_token, "04 03 2011 15:33:47.630",
 				"31 12 2011 15:33:47.630", url);
 		filter.addPoint(0.0, 0.0);
 		filter.addPoint(70.0, 0.0);
@@ -276,7 +278,7 @@ public class JsonRequestTest extends TestCase {
 
 	public void testFenceFilter() {
 		JsonFilterPolygonRequest filter = new JsonFilterFenceRequest(
-				"MMMMMMMMMM", -0.1, 0.1, "04 03 2011 15:33:47.630",
+				m_token, -0.1, 0.1, "04 03 2011 15:33:47.630",
 				"31 12 2011 15:33:47.630", url);
 		filter.addPoint(0.0, 0.0);
 		filter.addPoint(70.0, 0.0);
@@ -301,11 +303,11 @@ public class JsonRequestTest extends TestCase {
 	}
 
 	public void testFilterChannel() {
-		final JSONObject JSONResponse = new JsonSubscribeRequest("MMMMMMMMMM",
+		final JSONObject JSONResponse = new JsonSubscribeRequest(m_token,
 				"Fuel Prices", url).doRequest();
 		assertNotNull(JSONResponse);
 
-		final JSONObject JSONResponse1 = new JsonFilterChannelRequest("MMMMMMMMMM",
+		final JSONObject JSONResponse1 = new JsonFilterChannelRequest(m_token,
 				"Fuel Prices", 10, url).doRequest();
 		assertNotNull(JSONResponse1);
 		if (JSONResponse1 != null) {
@@ -326,7 +328,7 @@ public class JsonRequestTest extends TestCase {
 
 	public void testSubscribedChannels() {
 		final JSONObject JSONResponse = new JsonSubscribedChannelsRequest(
-				"MMMMMMMMMM", url).doRequest();
+				m_token, url).doRequest();
 		assertNotNull(JSONResponse);
 		if (JSONResponse != null) {
 			Log.out.println(LOG, JSONResponse.toString());
@@ -343,13 +345,13 @@ public class JsonRequestTest extends TestCase {
 			}
 		}
 	}
-	
+/*	
 	public void testLoadTags() {
 		String url = "http://localhost:81/service";
 		double latitude = 60.166504; 
 		double longitude = 24.841204;
 		double radius = 30.0;
-		final JSONObject JSONResponse = new JsonLoadTagsRequest("KKKKKKKKKK", 
+		final JSONObject JSONResponse = new JsonLoadTagsRequest(m_token, 
 				latitude, longitude, radius, url).doRequest();
 		assertNotNull(JSONResponse);
 		if (JSONResponse != null) {
@@ -367,5 +369,5 @@ public class JsonRequestTest extends TestCase {
 			}			
 		}
 	}
-
+*/
 }
