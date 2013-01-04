@@ -48,6 +48,7 @@
 			source="1.6"
 			target="1.6"
 			nowarn="true"
+		  includeantruntime="false"
 			debug="true">
 			<classpath 	refid="project.class.path" />
 		</javac>
