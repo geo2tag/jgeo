@@ -79,6 +79,7 @@
 		<javac 
 			srcdir="tests" 
 			destdir="bin"
+		  includeantruntime="false"
 			debug="true">
 			<classpath refid="project.class.path"/>
 			<classpath refid="classpath.test"/>
