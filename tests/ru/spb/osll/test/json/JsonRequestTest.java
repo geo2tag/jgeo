@@ -50,7 +50,8 @@ public class JsonRequestTest extends TestCase {
 	public static final String LOG = "TEST";
 
 	// GEO2TAG INSTANCE
-	public final String m_url = "http://tracks.osll.spb.ru:81/service";
+	//public final String m_url = "http://tracks.osll.spb.ru:81/service";
+	public final String m_url = "http://demo64.geo2tag.org:80/service";
 	public static String m_authToken = "MMMMMMMMMM";
 	
 	public void testLogin() {
@@ -77,7 +78,7 @@ public class JsonRequestTest extends TestCase {
             JsonVersionResponse r = new JsonVersionResponse();
             r.parseJson(JSONResponse);
             assertEquals(r.getErrno(), 0);
-            assertEquals(r.getVersionStr(), "0.19.1");
+            assertEquals(r.getVersionStr(), "0.21.2");
         }
     }
 
