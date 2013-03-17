@@ -78,7 +78,7 @@ public class JsonRequestTest extends TestCase {
             JsonVersionResponse r = new JsonVersionResponse();
             r.parseJson(JSONResponse);
             assertEquals(r.getErrno(), 0);
-            assertEquals(r.getVersionStr(), "0.21.2");
+            assertEquals(r.getVersionStr(), "0.25-rc2");
         }
     }
 
@@ -137,7 +137,7 @@ public class JsonRequestTest extends TestCase {
 		}
 	}
 
-	public void testAddUser() {
+	public void testAddUserExisting() {
 		final JSONObject JSONResponse = new JsonAddUserRequest(
 				"sergpetrov@gmail.com", "sergpetrov", "sergAP", m_url)
 				.doRequest();
@@ -146,11 +146,12 @@ public class JsonRequestTest extends TestCase {
 			Log.out.println(LOG, JSONResponse.toString());
 			JsonAddUserResponse r = new JsonAddUserResponse();
 			r.parseJson(JSONResponse);
-			boolean successResult = (r.getErrno()==Errno.SUCCESS)||
+			boolean successResult = 
 					(r.getErrno()==Errno.USER_ALREADY_EXIST_ERROR);
 			assertTrue(successResult);
 		}
 	}
+
 
 	public void testApplyChannel() {
 		final JSONObject JSONResponse = new JsonApplyChannelRequest(
