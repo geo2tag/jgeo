@@ -389,4 +389,17 @@ public class JsonRequestTest extends TestCase {
         }
     }
 
+    public void testSetDb() {
+        final JSONObject JSONResponse = new JsonSetDbRequest(
+                m_authToken, "unexisting_db", m_url)
+                .doRequest();
+        assertNotNull(JSONResponse);
+        if (JSONResponse != null) {
+            Log.out.println(LOG, JSONResponse.toString());
+            JsonSetDbResponse r = new JsonSetDbResponse();
+            r.parseJson(JSONResponse);
+            boolean successResult = (r.getErrno() == Errno.DB_DOES_NOT_EXIST_ERROR);
+            assertTrue(successResult);
+        }
+    }
 }
