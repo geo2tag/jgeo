@@ -55,6 +55,7 @@ abstract class JsonFilterBaseRequest extends JsonBaseRequest {
 	private double m_altitude1;
 	private double m_altitude2;
 	private boolean m_is3d = false;
+	private int m_tagNumber = 0;
 	
 	public JsonFilterBaseRequest(String authToken, String timeFrom, String timeTo, String serverUrl) {
 		setServerUrl(serverUrl);
@@ -76,11 +77,19 @@ abstract class JsonFilterBaseRequest extends JsonBaseRequest {
 		m_altitude2 = alt2;
 	}
 	
+	public void setTagNumber(int tagNumber) {
+		m_tagNumber  = tagNumber;	
+	}
+
 	protected JSONObject getJsonObject() throws JSONException {
 		JSONObject jsonObject = new JSONObject();
 		jsonObject.put(AUTH_TOKEN, m_authToken);
 		jsonObject.put(TIME_FROM, m_timeFrom);
 		jsonObject.put(TIME_TO, m_timeTo);
+
+		if ( m_tagNumber > 0 )
+			jsonObject.put(TAG_NUMBER, m_tagNumber);
+
 		if (m_is3d) {
 			JSONObject altObject = new JSONObject();
 			altObject.put(ALT1, m_altitude1);
