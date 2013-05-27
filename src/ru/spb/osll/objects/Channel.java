@@ -35,10 +35,16 @@
 
 package ru.spb.osll.objects;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Channel {
+public class Channel implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1628984996677484742L;
 	private String name;
 	private String title;
 	private String link;

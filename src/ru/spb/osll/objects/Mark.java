@@ -35,7 +35,13 @@
 
 package ru.spb.osll.objects;
 
-public class Mark {
+import java.io.Serializable;
+
+public class Mark implements Serializable {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8126856889901552605L;
 	private long id;
 	private String authToken;
 	private String channel;
