@@ -127,4 +127,9 @@ public class Mark implements Serializable {
 				+ "\n, description=" + description + "\n, latitude=" + latitude
 				+ "\n, longitude=" + longitude + "\n, time=" + time + "]";
 	}	
+	
+	@Override
+	public int hashCode(){
+		return toString().hashCode();
+	}
 }
