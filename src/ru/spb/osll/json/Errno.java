@@ -59,6 +59,7 @@ public class Errno {
     public static int WEAK_PASSWORD_ERROR	        = 20;
     public static int NOT_SUPPORTED         		= 21;
     public static int DB_DOES_NOT_EXIST_ERROR         	= 22;
+    public static int USER_DOES_NOT_OWN_CHANNEL_ERROR   = 23;
 
     private static Map<Integer, String> emap = new HashMap<Integer, String>();
     static {
@@ -85,6 +86,7 @@ public class Errno {
         emap.put(WEAK_PASSWORD_ERROR,		    "WEAK_PASSWORD_ERROR");       	// 20
         emap.put(NOT_SUPPORTED,			    "NOT_SUPPORTED");       		// 21
         emap.put(DB_DOES_NOT_EXIST_ERROR,           "DB_DOES_NOT_EXIST_ERROR");       	// 22
+        emap.put(USER_DOES_NOT_OWN_CHANNEL_ERROR,   "USER_DOES_NOT_OWN_CHANNEL_ERROR"); // 23
     }
 	
 	public static String getErrorByCode(int error) {

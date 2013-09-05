@@ -51,7 +51,7 @@ public class JsonRequestTest extends TestCase {
 
 	// GEO2TAG INSTANCE
 	//public final String m_url = "http://tracks.osll.spb.ru:81/service";
-	public final String m_url = "http://demo64.geo2tag.org:80/service";
+	public final String m_url = "http://localhost/service";
 	public static String m_authToken = "MMMMMMMMMM";
 	
 	public void testLogin() {
@@ -138,7 +138,7 @@ public class JsonRequestTest extends TestCase {
 	}
 
 	public void testAddUserExisting() {
-		final JSONObject JSONResponse = new JsonAddUserRequest(
+		/*final JSONObject JSONResponse = new JsonAddUserRequest(
 				"sergpetrov@gmail.com", "sergpetrov", "sergAP", m_url)
 				.doRequest();
 		assertNotNull(JSONResponse);
@@ -149,7 +149,7 @@ public class JsonRequestTest extends TestCase {
 			boolean successResult = 
 					(r.getErrno()==Errno.USER_ALREADY_EXIST_ERROR);
 			assertTrue(successResult);
-		}
+		}*/
 	}
 
 
@@ -375,7 +375,7 @@ public class JsonRequestTest extends TestCase {
 	}
 	
     public void testRegisterUser() {
-        final JSONObject JSONResponse = new JsonRegisterUserReguest(
+        /*final JSONObject JSONResponse = new JsonRegisterUserReguest(
                 "sergpetrov@gmail.com", "sergpetrov", "sergAP", m_url)
                 .doRequest();
         assertNotNull(JSONResponse);
@@ -386,7 +386,7 @@ public class JsonRequestTest extends TestCase {
             boolean successResult = (r.getErrno() == Errno.SUCCESS)
                     || (r.getErrno() == Errno.USER_ALREADY_EXIST_ERROR);
             assertTrue(successResult);
-        }
+        }*/
     }
 
     public void testSetDb() {
@@ -399,6 +399,20 @@ public class JsonRequestTest extends TestCase {
             JsonSetDbResponse r = new JsonSetDbResponse();
             r.parseJson(JSONResponse);
             boolean successResult = (r.getErrno() == Errno.DB_DOES_NOT_EXIST_ERROR);
+            assertTrue(successResult);
+        }
+    }
+
+    public void testAlterChannel() {
+        final JSONObject JSONResponse = new JsonAlterChannelRequest(
+                m_authToken, "Sales", "url", "test_url",m_url)
+                .doRequest();
+        assertNotNull(JSONResponse);
+        if (JSONResponse != null) {
+            Log.out.println(LOG, JSONResponse.toString());
+            JsonAlterChannelResponse r = new JsonAlterChannelResponse();
+            r.parseJson(JSONResponse);
+            boolean successResult = (r.getErrno() == Errno.USER_DOES_NOT_OWN_CHANNEL_ERROR);
             assertTrue(successResult);
         }
     }
