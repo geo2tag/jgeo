@@ -416,4 +416,18 @@ public class JsonRequestTest extends TestCase {
             assertTrue(successResult);
         }
     }
+
+	public void testChangePassword() {
+		Log.out.println(LOG + " Change password", "Start");
+		JSONObject JSONResponse = new JsonChangePasswordRequest("Mark", "test", "test", m_url)
+				.doRequest();
+		assertNotNull(JSONResponse);
+		if (JSONResponse != null) {
+			Log.out.println(LOG, JSONResponse.toString());
+			JsonChangePasswordResponse r = new JsonChangePasswordResponse();
+			r.parseJson(JSONResponse);
+			assertEquals(r.getErrno(), Errno.SUCCESS);
+		}
+		Log.out.println(LOG + " Change password", "Finish");
+	}
 }

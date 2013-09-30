@@ -170,4 +170,12 @@ public interface IRequest {
         String VALUE = "value";
         String FIELD = "field";
     }
+
+    public interface IChangePassword {
+        String REQUEST = "/changePassword";
+
+        String LOGIN = "login";
+        String PASSWORD = "password";
+        String NEW_PASSWORD = "new_password";
+    }
 }
