@@ -36,6 +36,8 @@ import java.util.Map;
 
 public class Errno {
 
+	public static int JSON_PARSING_ERROR                = -2;
+	public static int EMPTY_SERVER_RESPONER_ERROR       = -1;
     public static int SUCCESS                           = 0;
     public static int WRONG_TOKEN_ERROR                 = 1;
     public static int USER_ALREADY_EXIST_ERROR          = 2;
@@ -56,13 +58,15 @@ public class Errno {
     public static int TMP_USER_ALREADY_EXIST_ERROR      = 17;
     public static int NETWORK_ERROR                     = 18;
     public static int EMAIL_ALREADY_EXIST_ERROR         = 19;
-    public static int WEAK_PASSWORD_ERROR	        = 20;
-    public static int NOT_SUPPORTED         		= 21;
+    public static int WEAK_PASSWORD_ERROR	            = 20;
+    public static int NOT_SUPPORTED         		    = 21;
     public static int DB_DOES_NOT_EXIST_ERROR         	= 22;
     public static int USER_DOES_NOT_OWN_CHANNEL_ERROR   = 23;
 
     private static Map<Integer, String> emap = new HashMap<Integer, String>();
     static {
+    	emap.put(JSON_PARSING_ERROR,				"JSON_PARSING_ERROR");				// -2
+    	emap.put(EMPTY_SERVER_RESPONER_ERROR,       "EMPTY_SERVER_RESPONER_ERROR");     // -1
         emap.put(SUCCESS,                           "SUCCESS");                         // 0
         emap.put(WRONG_TOKEN_ERROR,                 "WRONG_TOKEN_ERROR");               // 1
         emap.put(USER_ALREADY_EXIST_ERROR,          "USER_ALREADY_EXIST_ERROR");        // 2
@@ -83,8 +87,8 @@ public class Errno {
         emap.put(TMP_USER_ALREADY_EXIST_ERROR,      "TMP_USER_ALREADY_EXIST_ERROR");    // 17
         emap.put(NETWORK_ERROR,                     "NETWORK_ERROR");                   // 18
         emap.put(EMAIL_ALREADY_EXIST_ERROR,         "EMAIL_ALREADY_EXIST_ERROR");       // 19
-        emap.put(WEAK_PASSWORD_ERROR,		    "WEAK_PASSWORD_ERROR");       	// 20
-        emap.put(NOT_SUPPORTED,			    "NOT_SUPPORTED");       		// 21
+        emap.put(WEAK_PASSWORD_ERROR,		        "WEAK_PASSWORD_ERROR");       	    // 20
+        emap.put(NOT_SUPPORTED,			            "NOT_SUPPORTED");       		    // 21
         emap.put(DB_DOES_NOT_EXIST_ERROR,           "DB_DOES_NOT_EXIST_ERROR");       	// 22
         emap.put(USER_DOES_NOT_OWN_CHANNEL_ERROR,   "USER_DOES_NOT_OWN_CHANNEL_ERROR"); // 23
     }

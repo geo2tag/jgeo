@@ -43,8 +43,10 @@ import ru.spb.osll.log.Log;
 
 public class JsonBaseResponse {
 	public final String LOG = JsonBase.LOG; 
+	public static final int INVALID_ERRNO = -11111;
 	
-	private int m_errno = -1;
+	
+	private int m_errno = INVALID_ERRNO;
 	
 	public void parseJson(JSONObject obj){
     	try {
