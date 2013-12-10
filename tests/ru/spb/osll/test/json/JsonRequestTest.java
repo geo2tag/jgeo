@@ -78,7 +78,7 @@ public class JsonRequestTest extends TestCase {
             JsonVersionResponse r = new JsonVersionResponse();
             r.parseJson(JSONResponse);
             assertEquals(r.getErrno(), 0);
-            assertEquals(r.getVersionStr(), "0.25-rc2");
+            assertEquals(r.getVersionStr(), "0.29");
         }
     }
 
@@ -430,4 +430,18 @@ public class JsonRequestTest extends TestCase {
 		}
 		Log.out.println(LOG + " Change password", "Finish");
 	}
+
+    public void testFilterSubstring() {
+        final JSONObject JSONResponse = new JsonFilterSubstringRequest(
+                m_authToken,  "url", "test_url",m_url)
+                .doRequest();
+        assertNotNull(JSONResponse);
+        if (JSONResponse != null) {
+            Log.out.println(LOG, JSONResponse.toString());
+            JsonFilterSubstringResponse r = new JsonFilterSubstringResponse();
+            r.parseJson(JSONResponse);
+            boolean successResult = (r.getErrno() == Errno.SUCCESS);
+            assertTrue(successResult);
+        }
+    }
 }

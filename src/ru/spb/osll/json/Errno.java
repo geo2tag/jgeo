@@ -36,6 +36,7 @@ import java.util.Map;
 
 public class Errno {
 
+	public static int TRACK_ATTEMPTS_FAILED_ERROR		= -3;
 	public static int JSON_PARSING_ERROR                = -2;
 	public static int EMPTY_SERVER_RESPONER_ERROR       = -1;
     public static int SUCCESS                           = 0;
