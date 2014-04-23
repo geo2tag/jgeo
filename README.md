@@ -1,4 +1,4 @@
 jgeo
 ====
 
-Java ME library for geo2tag LBS platform
+Java/Android library for geo2tag LBS platform
